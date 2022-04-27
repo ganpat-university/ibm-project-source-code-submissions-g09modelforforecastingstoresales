@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript"></script>
+</head>
+<body>
+    <div id="chartContainer1" style="height:200px;width:500px"></div>
+    <div id="cd2" style="height:200px;width:500px;margin-left:35%;"></div>
+    <div id="cd3" style="height:200px;width:500px;margin-left:60%;"></div>
+
+    <script>
+    var chart1 = new CanvasJS.Chart("chartContainer1",{
+        title :{
+            text: "Live Data"
+        },
+        data: [{
+        type: "column",
+            dataPoints : [
+            { label: "apple",  y: 10  },
+            { label: "orange", y: 15  },
+            { label: "banana", y: 25  },
+            { label: "mango",  y: 30  },
+            { label: "grape",  y: 28  }
+        ]
+        }]
+    });
+ 
+    var chart2 = new CanvasJS.Chart("cd2",{
+        title :{
+            text: "Live Data"
+        },
+        data: [{
+        type: "column",
+            dataPoints : [
+            { label: "apple",  y: 10  },
+            { label: "orange", y: 15  },
+            { label: "banana", y: 25  },
+            { label: "mango",  y: 30  },
+            { label: "grape",  y: 28  }
+        ]
+        }]
+    });
+    var chart3 = new CanvasJS.Chart("cd3",{
+        title :{
+            text: "Live Data"
+        },
+        data: [{
+        type: "column",
+            dataPoints : [
+            { label: "apple",  y: 10  },
+            { label: "orange", y: 15  },
+            { label: "banana", y: 25  },
+            { label: "mango",  y: 30  },
+            { label: "grape",  y: 28  }
+        ]
+        }]
+    });
+
+ 
+     
+    chart1.render();
+    chart2.render();
+    chart3.render();
+
+    </script>
+</body>
+</html>
