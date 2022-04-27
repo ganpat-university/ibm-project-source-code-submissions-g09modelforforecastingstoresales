@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> Graph Genre </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      button{
+        float: right;
+      }
+      
+      h1{
+        background-color: rgba(121, 97, 101, 0.849);
+      }
+    </style>
+  </head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<body>
+  <button class="btn"><a href="/upload/" class="fa fa-home"><span class="label"></span></a></button>
+  <button class="btn"><a href="/graph/" class="fa fa-bar-chart"><span class="label"></span></a></button>
+  {% if FinalSelectYear %}
+  <h1> Chart for Global sale vs Publisher of {{PublishC}}</h1>
+  {% else %}  
+  <h1> Chart for Global sale vs Publisher for Publishers </h1>
+  {% endif %}
+<form method= "POST" action="/graphGenre/">
+
+
+  <select id="publisher" name="Publisher">
+    <option> Select Publisher {{selectPublisher}}</option>
+    {% for i in data %}
+    {% for j in i.selectPublisher%}
+    <option value="{{j}}">{{j}}</option>
+{% endfor %}
+{% endfor %}
+</select>
+    <input type="submit" value="Submit" class="myButton">
+</form>
+  {% comment %} <canvas id="chart1" style="height: 10px ; width: 50px;"> {% endcomment %}
+  <canvas id="chart1" style="height:200px;width:500px;">
+
+  <script>
+  const ctx = document.getElementById('chart1').getContext('2d');
+  
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: [{% for item in data  %}'{{ item.Name }}',{% endfor %}],
+          datasets: [{
+              label: '# of name',
+              data: [{% for item in data %}'{{item.gs}}',{% endfor %}],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+  </script>
+
+<script>
+document.querySelector("form")
+.addEventListener("submit", function(e) {
+  e.preventDefault(); // prevent default action
+  var select = this.querySelector("select");
+  console.log('select',select.value);
+  location.href = '/GraphPublish/'+select.value;
+  
+  {% comment %} if (select.value !== "0") {
+    location.href = select.value;
+  } {% endcomment %}
+})
+</script>
+</body>
+
+</html>
